@@ -11,6 +11,7 @@ $message="";
 
 if (isset($_POST["submit"])) {
   if (isset($_POST["prenom"]) && isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["roles"]) && isset($_POST["photo"])) {
+    if (!empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["roles"])) {
 
 
 
@@ -49,7 +50,7 @@ if (isset($_POST["submit"])) {
       $message3 .= "<label>Cet email existe déjà !</label>"; */
     }
   }
-/* } */
+} 
 
 ?>
 <!DOCTYPE html>
@@ -151,17 +152,17 @@ if (isset($_POST["submit"])) {
 
 
 
-        <form class="container row w-100 needs-validation d-flex" method="post" action="">
+        <form id="submit" class="container row w-100 needs-validation d-flex" method="post" action="">
 
-        <span id="erreur6"></span>
+
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">PRENOM<span>*</span></label>
-            <input type="text" name="prenom" id=prenom class="form-control mb-3 border border-dark" placeholder="entre votre email" >
+            <input type="text" name="prenom" id="prenom" class="form-control mb-3 border border-dark" placeholder="entre votre email" >
             <span id="erreur"></span>
           </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">NOM<span>*</span></label>
-            <input type="text" name="nom" id=nom class="form-control mb-3 border border-dark" placeholder="entre votre email">
+            <input type="text" name="nom" id="nom" class="form-control mb-3 border border-dark" placeholder="entre votre email">
             <span id="erreur1"></span>
           </div>
 
@@ -173,7 +174,7 @@ if (isset($_POST["submit"])) {
 
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-select ">ROLE<span>*</span></label>
-            <select type="text" id=roles name="roles" class="form-control mb-3 border border-dark" placeholder="entre votre role" >
+            <select type="text" id="roles" name="roles" class="form-control mb-3 border border-dark" placeholder="entre votre role" >
             <option value=""></option>
                 <option>ADMINISTRATEUR</option>
                 <option>UTILISATEUR</option>
@@ -182,18 +183,18 @@ if (isset($_POST["submit"])) {
           </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">MOT DE PASSE<span>*</span></label>
-            <input type="text" id=mot_passe name="mot_passe" class="form-control mb-3 border border-dark" placeholder="entre votre mot de passe">
+            <input type="text" id="mot_passe" name="mot_passe" class="form-control mb-3 border border-dark" placeholder="entre votre mot de passe">
             <span id="erreur4"></span>
           </div>
 
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">MOT DE PASSE<span>*</span></label>
-            <input type="text" name="confirmation" id=confirmation class="form-control mb-3 border border-dark" placeholder="entre votre mot de passe" >
+            <input type="text" name="confirmation" id="confirmation" class="form-control mb-3 border border-dark" placeholder="entre votre mot de passe" >
             <span id="erreur5"></span>
           </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">PHOTO</label>
-            <input type="file" id=photo name="photo" class="form-control mb-3 border border-dark" placeholder="entrer votre photo" >
+            <input type="file" id="photo" name="photo" class="form-control mb-3 border border-dark" placeholder="entrer votre photo" >
             
           </div>
           <div class="col-lg-6">
@@ -202,14 +203,13 @@ if (isset($_POST["submit"])) {
           </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label "></label>
-            <button class="form-control color" id=submit style="background-color:#163666;color:white" type="submit" name="submit">INSCRIPTION</button>
+            <button class="form-control color" id="submit" style="background-color:#163666;color:white" type="submit" name="submit">INSCRIPTION</button>
+            <!-- <span id="erreur6"></span> -->
           </div>
 
           <div class="col-lg-6 d-flex justify-content-center mt-3">
-            <p >CONNECTION</p>
-           
+            <p class="text-primary">CONNECTION</p>
           </div>
-          
         </form>
 
 

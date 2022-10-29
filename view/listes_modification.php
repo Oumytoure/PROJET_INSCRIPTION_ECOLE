@@ -11,8 +11,20 @@
     <title>Document</title>
 </head>
 <body>
+<header>
+<div class="logo container-fluid" style="position:fixed;width:100%; height: 150px;background-color:#0c82d1;display:flex;align-items:center;top:0px;" >
+            <div class="container-fluid"><img src="images/image.jpeg" alt=""data-toggle="modal" data-target="#exampleModal" style="float: left;"></div>
+                <div class="menu" >
+                    <nav class="navbar navbar-expand-lg " style="background-color:#0c82d1;">
+                        <div class="container-fluid" >
+                          <button class="btn btn-outline-success" type="submit" style="background-color:white;"><a href="connection.php">Deconnection</a></button>
+                      </div>
+                   </nav>
+             </div>
+        </div>
+        </header> 
     <div class="container">
-        <h1 style="display:flex;justify-content:center;margin-top:50px;font-weight:bold;">LISTES EMPLOYEES</h1>
+        <h1 style="display:flex;justify-content:center;margin-top:170px;font-weight:bold;">LISTES EMPLOYEES</h1>
         <table class="table table-bordered table-hover table-stripped">
             <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>ROLE</th><th>MATRICULE</th><th>ACTIONS</th></tr>
             <?php
@@ -24,11 +36,10 @@
                 $nom = $data["nom"];
                 $prenom = $data["prenom"];
                 $email = $data["email"];
-                $role = $data["role"];
+                $roles = $data["roles"];
                 $matricule = $data["matricule"];
-                $classe= $data["classe"];
-                $nom_prof= $data["nom_prof"];
-                echo "<tr><td>$jour</td><td>$horaire</td><td>$salle</td><td>$matiere</td><td>$niveau</td><td>$classe</td><td>$nom_prof</td>";
+        
+                echo "<tr><td>$nom</td><td>$prenom</td><td>$email</td><td>$roles</td><td>$matricule</td>";
                 echo "<td style='display:flex; gap: 10px; justify-content:center;'>";
                 echo "<a href='modifier_emploi_du_temps.php?id=$id' class='btn btn-warning'>Modifier</a>";
                 echo "<a href='Modifier_emploi_du_temps1.php?id=$id' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer\")' class='btn btn-danger'>Supprimer</a>";
@@ -38,19 +49,18 @@
            ?>
         </table>
         <?php
-            if(isset($_POST["valide"])){
-            if(isset($_POST["id"]) && isset($_POST["jour"]) && isset($_POST["horaire"]) && isset($_POST["salle"]) && isset($_POST["matiere"]) && isset($_POST["niveau"]) && isset($_POST["nom_prof"]))
+            if(isset($_POST["submit"])){
+            if(isset($_POST["id"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["email"]) && isset($_POST["role"]) && isset($_POST["matricule"]))
             {   
-            if(!empty($_POST["jour"]) && !empty($_POST["horaire"]) && !empty($_POST["salle"]) && !empty($_POST["matiere"]) && !empty($_POST["niveau"]) && !empty($_POST["nom_prof"])){
-            $jour = $_POST["jour"];
-            $horaire = $_POST["horaire"];
-            $salle = $_POST["salle"];
-            $matiere = $_POST["matiere"];
-            $niveau = $_POST["niveau"];
-            $classe = $_POST["classe"];
-            $nom_prof = $_POST["nom_prof"];
-                    include("Connection_dba.php");
-                    $list = "UPDATE emploi_du_temps SET jour = '$jour', horaire = '$horaire', salle= '$salle',matiere = '$matiere ', niveau = '$niveau', nom_prof = '$nom_prof' WHERE id_edt  = $id";
+            if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]) && !empty($_POST["roles"]) && !empty($_POST["matricule"])){
+            $nom = $_POST["nom"];
+            $prenom = $_POST["prenom"];
+            $email = $_POST["email"];
+            $role = $_POST["role"];
+            $matricule = $_POST["matricule"];
+            
+                    include("connection_bd.php");
+                    $list = "UPDATE INSCRIPTION SET nom = '$nom', prenom = '$prenom', email= '$email',roles = '$roles ', matricule = '$matricule' WHERE id  = $id";
                     $dbco->exec($list);
                     echo "Modification réussie";
                     
