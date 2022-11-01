@@ -1,7 +1,11 @@
 <?php
+session_start();
 ini_set("display_errors", "1");
 error_reporting(E_ALL);
 $message="";
+$message1="";
+$message2="";
+
 @$prenom = $_POST["prenom"];
 @$nom = $_POST["nom"];
 @$email = $_POST["email"];
@@ -16,12 +20,16 @@ if (isset($_POST["submit"])) {
 
 
 
-      /* if (filter_var($_POST['email'], FILTER_VALIDATE_EMAIL)) {
+      if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
         
-        exit();
-      } */
+      }
+      
 
-      include("connection_bd.php");
+      include("../controler/connection_bd.php");
+      $sth = $dbco->prepare(" SELECT * FROM INSCRIPTION WHERE email = '".$email."'"); 
+            $sth->execute();
+            $res = $sth->fetchAll(PDO::FETCH_ASSOC); 
+            if(count($res) == 0){ 
       $sth = $dbco->prepare(" INSERT INTO INSCRIPTION(prenom,nom,email,roles,mot_passe,photo)
     VALUES (?, ?, ?, ?, ?, ?) ");
 
@@ -46,11 +54,13 @@ if (isset($_POST["submit"])) {
                 $matricule2->execute();
               
     }  else {
-     /*  $message2 .= "<label>Enregistrement invalide !</label>";
-      $message3 .= "<label>Cet email existe déjà !</label>"; */
+      $message2 .= "<label>Enregistrement invalide !</label>";
+      $message1 .= "<label>Cet email existe déjà !</label>"; 
     }
   }
 } 
+} 
+
 
 ?>
 <!DOCTYPE html>
@@ -150,11 +160,19 @@ if (isset($_POST["submit"])) {
       </form> -->
 
 
+      
 
-
-        <form id="submit" class="container row w-100 needs-validation d-flex" method="post" action="">
-
-
+        <form id="form" class="container row w-100 needs-validation d-flex" method="post" action="">
+        <div class="col-lg-12  d-flex justify-content-center">
+                <?php if(!empty($message)); {?>
+                <div style="display:flex; color:red;flex-direction:column;"> <?php echo $message;  ?> </div> 
+                <?php }?> 
+              </div>
+              <div class="col-lg-12 d-flex justify-content-center">
+              <?php if(!empty($message2)); {?>
+                <div style="display:flex; color:red;flex-direction:column;"> <?php echo $message2;  ?> </div> 
+                <?php }?> 
+              </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">PRENOM<span>*</span></label>
             <input type="text" name="prenom" id="prenom" class="form-control mb-3 border border-dark" placeholder="entre votre email" >
@@ -168,22 +186,25 @@ if (isset($_POST["submit"])) {
 
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">EMAIL<span>*</span></label>
-            <input type="email" id=email name="email" class="form-control mb-3 border border-dark" placeholder="entre votre email" >
+            <input type="email" id="email" name="email" class="form-control mb-3 border border-dark" placeholder="entre votre email" >
             <span id="erreur2"></span>
+            <?php if(!empty($message1)); {?>
+                <div style="display:flex; color:red;flex-direction:column;"> <?php echo $message1;  ?> </div> 
+                <?php }?> 
           </div>
 
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-select ">ROLE<span>*</span></label>
-            <select type="text" id="roles" name="roles" class="form-control mb-3 border border-dark" placeholder="entre votre role" >
+            <select type="password" id="roles" name="roles" class="form-control mb-3 border border-dark" placeholder="entre votre role" >
             <option value=""></option>
                 <option>ADMINISTRATEUR</option>
                 <option>UTILISATEUR</option>
               </select>
-            <span id="erreur3"></span>
+              <span id="erreur3"></span>
           </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">MOT DE PASSE<span>*</span></label>
-            <input type="text" id="mot_passe" name="mot_passe" class="form-control mb-3 border border-dark" placeholder="entre votre mot de passe">
+            <input type="password" id="mot_passe" name="mot_passe" class="form-control mb-3 border border-dark" placeholder="entre votre mot de passe">
             <span id="erreur4"></span>
           </div>
 
@@ -215,6 +236,8 @@ if (isset($_POST["submit"])) {
 
     </div>
   </div>
-  <script src="inscription.js"></script>
+  
+  <script src="../controler/inscription.js"></script>
 </body>
+
 </html>

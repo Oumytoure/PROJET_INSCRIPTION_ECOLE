@@ -95,7 +95,7 @@ var submit = document.getElementById('submit')
         erreur5.style.color = 'green'; 
   })
 
-  submit.addEventListener('submit',function(e){
+  form.addEventListener('submit',function(e){
 
         var erreur = document.getElementById("erreur");
         
@@ -126,18 +126,22 @@ var submit = document.getElementById('submit')
         }
        
          var erreur2 = document.getElementById("erreur2");
-         
-        
+       /*   var expressionReguliere='^[a-zA-Z0-9]+[a-zA-Z0-9.-]+[@]{1}[a-zA-Z0-9.-]+[.]{1}[a-z]{2,10}$'; */
+
          if (email.value.trim() =='')  {
             
              erreur2.innerHTML = 'entrer votre email';
              erreur2.style.color = 'red';
              e.preventDefault();
            }
-           else{
+           else if(email.value.match(expressionReguliere)) {
            erreur2.innerHTML = 'cooooooooool!';
            erreur2.style.color = 'green'; 
             }    
+            else{
+                erreur2.innerHTML = 'Email invalide';
+                erreur2.style.color = 'red';  
+            } 
        
          var erreur3= document.getElementById("erreur3");
          
