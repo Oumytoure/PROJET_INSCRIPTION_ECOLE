@@ -1,68 +1,6 @@
 <?php
-session_start();
-ini_set("display_errors", "1");
-error_reporting(E_ALL);
-$message="";
-$message1="";
-$message2="";
-
-@$prenom = $_POST["prenom"];
-@$nom = $_POST["nom"];
-@$email = $_POST["email"];
-@$roles = $_POST["roles"];
-@$mot_passe = $_POST["mot_passe"];
-@$photo = $_POST["photo"];
-
-if (isset($_POST["submit"])) {
-  if (isset($_POST["prenom"]) && isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["roles"]) && isset($_POST["photo"])) {
-    if (!empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["roles"])) {
-
-
-
-
-      if (!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        
-      }
-      
-
-      include("../controler/connection_bd.php");
-      $sth = $dbco->prepare(" SELECT * FROM INSCRIPTION WHERE email = '".$email."'"); 
-            $sth->execute();
-            $res = $sth->fetchAll(PDO::FETCH_ASSOC); 
-            if(count($res) == 0){ 
-      $sth = $dbco->prepare(" INSERT INTO INSCRIPTION(prenom,nom,email,roles,mot_passe,photo)
-    VALUES (?, ?, ?, ?, ?, ?) ");
-
-      $sth->bindValue(1, $prenom);
-      $sth->bindValue(2, $nom);
-      $sth->bindValue(3, $email);
-      $sth->bindValue(4, $roles);
-      $sth->bindValue(5, $mot_passe);
-      $sth->bindValue(6, $photo);
-      $sth->execute();
-
-      $message .= "<label>Enregistrement valide !</label>"; 
-              $sql = "SELECT id FROM INSCRIPTION WHERE email = '".$email."'";
-                $id = $dbco->prepare($sql);
-                $id->execute();
-                $row = $id->fetch(PDO::FETCH_ASSOC);
-                //on modifie le matricule
-                $matricule = 'SN-'.$row['id'].date('-Y', time());
-                //on modifie la derniere matricule du BD
-                $sql2 = "UPDATE INSCRIPTION   SET  matricule = '$matricule' WHERE email = '".$email."'";
-                $matricule2 = $dbco->prepare($sql2);
-                $matricule2->execute();
-              
-    }  else {
-      $message2 .= "<label>Enregistrement invalide !</label>";
-      $message1 .= "<label>Cet email existe déjà !</label>"; 
-    }
-  }
-} 
-} 
-
-
-?>
+ include("../controler/inscription_verif.php");
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -162,16 +100,20 @@ if (isset($_POST["submit"])) {
 
       
 
-        <form id="form" class="container row w-100 needs-validation d-flex" method="post" action="">
+        <form id="form" class="container row w-100 needs-validation d-flex" method="post" action="../controler/incription_verif.php">
         <div class="col-lg-12  d-flex justify-content-center">
-                <?php if(!empty($message)); {?>
-                <div style="display:flex; color:red;flex-direction:column;"> <?php echo $message;  ?> </div> 
-                <?php }?> 
+        <?php 
+        if(isset($_GET["erreur"])):                         
+          $message = $_GET["erreur"];?>                     
+            <p class="d-flex text-danger justify-content-center fs-2  align-items-center p-2"> <?php echo $message;?></p>    
+              <?php endif; ?>
               </div>
-              <div class="col-lg-12 d-flex justify-content-center">
-              <?php if(!empty($message2)); {?>
-                <div style="display:flex; color:red;flex-direction:column;"> <?php echo $message2;  ?> </div> 
-                <?php }?> 
+              <div class="col-lg-12  d-flex justify-content-center">
+              <?php 
+              if(isset($_GET["erreur1"])):                         
+              $email = $_GET["erreur1"];?>                     
+            <p class="d-flex text-danger justify-content-center fs-2  align-items-center p-2"> <?php echo $email;?></p>    
+              <?php endif; ?>
               </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">PRENOM<span>*</span></label>
@@ -186,16 +128,14 @@ if (isset($_POST["submit"])) {
 
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">EMAIL<span>*</span></label>
-            <input type="email" id="email" name="email" class="form-control mb-3 border border-dark" placeholder="entre votre email" >
+            <input type="text" id="email" name="email" class="form-control mb-3 border border-dark" placeholder="entre votre email" >
             <span id="erreur2"></span>
-            <?php if(!empty($message1)); {?>
-                <div style="display:flex; color:red;flex-direction:column;"> <?php echo $message1;  ?> </div> 
-                <?php }?> 
+            
           </div>
 
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-select ">ROLE<span>*</span></label>
-            <select type="password" id="roles" name="roles" class="form-control mb-3 border border-dark" placeholder="entre votre role" >
+            <select type="text" id="roles" name="roles" class="form-control mb-3 border border-dark" placeholder="entre votre role" >
             <option value=""></option>
                 <option>ADMINISTRATEUR</option>
                 <option>UTILISATEUR</option>
@@ -210,7 +150,7 @@ if (isset($_POST["submit"])) {
 
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">MOT DE PASSE<span>*</span></label>
-            <input type="text" name="confirmation" id="confirmation" class="form-control mb-3 border border-dark" placeholder="entre votre mot de passe" >
+            <input type="password" name="confirmation" id="confirmation" class="form-control mb-3 border border-dark" placeholder="entre votre mot de passe" >
             <span id="erreur5"></span>
           </div>
           <div class="col-lg-6">
@@ -229,7 +169,7 @@ if (isset($_POST["submit"])) {
           </div>
 
           <div class="col-lg-6 d-flex justify-content-center mt-3">
-            <p class="text-primary">CONNECTION</p>
+          <a href="connection.php"><p class="text-primary">CONNECTION</p></a>
           </div>
         </form>
 

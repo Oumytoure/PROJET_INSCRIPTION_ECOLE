@@ -30,14 +30,15 @@
        
        <div><img src="images/dev1.jpg" alt="" style="width:100px;height:100px;border-radius:50%;margin-top:200px;margin-left:-90px;"></div>
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;">
-    
-       <a href=""><p >ultilisateurs</p></a>
+       <a href="acceuil_admin.php"><p >utilisateurs</p></a>
+       <a href="archives.php"><p >archives</p></a>
        </div>
         <table class="table table-bordered table-hover table-stripped">
-            <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>ROLE</th><th>MATRICULE</th></tr>
+            <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>ROLE</th><th>MATRICULE</th><th>ACTIONS</th></tr>
             <?php
                 
-                include("../controler/user_simple_verif.php");
+                include("../controler/ARCHIVER_VERIF.php");
+                
               /*   $list = "SELECT * FROM INSCRIPTION";
                 $result = $dbco->query($list);
                 while($data = $result->fetch()){

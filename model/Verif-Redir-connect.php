@@ -5,11 +5,11 @@ ini_set("display_errors", "1");
 error_reporting(E_ALL);
 $message1=""; 
 $message2=""; 
-@$email = $_POST["Email"];
+@$email = $_POST["email"];
 @ $mot_passe = $_POST["mot_passe"];
 
     
-        if(isset($_POST["Email"]) && isset($_POST["mot_passe"]) && !empty($_POST["Email"]) && !empty($_POST["mot_passe"]))
+        if(isset($_POST["email"]) && isset($_POST["mot_passe"]) && !empty($_POST["email"]) && !empty($_POST["mot_passe"]))
         {
 
           
@@ -22,7 +22,7 @@ $message2="";
                     exit();
                   }  
                 
-                  include("connection_bd.php");
+                  include("../controler/connection_bd.php");
                   
               
                   try{
@@ -30,7 +30,7 @@ $message2="";
                   $sth->execute();
                   $res = $sth->fetch(PDO::FETCH_ASSOC); 
                  
-                  if(count($res) > 0 && $mot_passe == $res['mot_passe'] && $res['roles'] == 'ADMINISTRATEUR'){ 
+                  if(count($res) > 0 && $mot_passe == $res["mot_passe"] && $res["roles"] == 'ADMINISTRATEUR'){ 
                     $_SESSION["nom"]=$res["nom"];
                     $_SESSION["prenom"]=$res["prenom"];
                     $_SESSION["matricule"]=$res["matricule"];
@@ -38,7 +38,7 @@ $message2="";
                   
                       header("Location:acceuil_admin.php");
                   }
-                  else if(count($res) > 0 && $mot_passe == $res['mot_passe'] && $res['roles'] == 'UTILISATEUR'){
+                  else if(count($res) > 0 && $mot_passe == $res["mot_passe"] && $res["roles"] == 'UTILISATEUR'){
                     $_SESSION["nom"]=$res["nom"];
                     $_SESSION["prenom"]=$res["prenom"];
                     $_SESSION["matricule"]=$res["matricule"];
@@ -57,7 +57,21 @@ $message2="";
                  
                    }
                 }
-                 
+            /*     
+                if($_SERVER['REQUEST_METHODE']=='POST'){
+
+              
+                $email=$_POST['email'];
+                $mot_passe=sha1($_POST['mot_passe']);
+                $stmt= $conn-> prepare("SELECT * FROM UTILISATEUR WHERE email= ? AND mot_pass= ? LIMIT 1 ");
+                $stmt->excecute(array($email,$mot_passe));
+                $checkUTILISATEUR = $stmt->rowCount();
+                $UTILISATEUR=  $stmt->fetch();
+                if($checkUTILISATEUR >0){
+                  $_SESSION['UTILISATEUR']=$UTILISATEUR['email'];
+
+                }
+              } */
               /*   $sth = $dbco->prepare(" SELECT * FROM INSCRIP WHERE email = '".$email."'"); 
                 $sth->execute();
                 $res = $sth->fetchAll(PDO::FETCH_ASSOC); 

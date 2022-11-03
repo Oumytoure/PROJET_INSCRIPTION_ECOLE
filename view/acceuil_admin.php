@@ -19,7 +19,7 @@
                 <div class="menu" >
                     <nav class="navbar navbar-expand-lg " style="background-color:#0c82d1;">
                         <div class="container-fluid" >
-                          <button class="btn btn-outline-success" type="submit" style="background-color:white;"><a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket"></i>Deconnection</a></button>
+                        <a ><button class="btn btn-outline-success" type="submit" style="background-color:white;"><a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket"></i>Deconnection</button></a>
                       </div>
                    </nav>
              </div>
@@ -27,17 +27,24 @@
         </header> 
     <div class="container">
     
-       
+    
        <div><img src="images/dev1.jpg" alt="" style="width:100px;height:100px;border-radius:50%;margin-top:200px;margin-left:-90px;"></div>
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;">
-    <a href=""><p >utilisateurs</p></a>
-       <a href=""><p >archives</p></a>
+    <a href="acceuil_admin.php"><p >utilisateurs</p></a>
+       <a href="archives.php"><p >archives</p></a>
+       <div style="display: flex; justify-content:center;height:100px; align-items:center;" class="container-fluid">
+             <form action="" method="post" style="display: flex;gap:15px;">
+                <input type="text" name="classe" placeholder="Entrer prenom eleve ou nom classe" class="form-control col-lg-9">
+                <input type="submit" name="verif" value="RECHERCHER" class="btn btn-info">
+            </form> 
+            </div>
        </div>
         <table class="table table-bordered table-hover table-stripped">
             <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>ROLE</th><th>MATRICULE</th><th>ACTIONS</th></tr>
             <?php
                 
-                include("../model/admin_verif.php");
+                include("../controler/admin_verif.php");
+                
               /*   $list = "SELECT * FROM INSCRIPTION";
                 $result = $dbco->query($list);
                 while($data = $result->fetch()){
@@ -64,7 +71,7 @@
                         
                 }
             } */
-
+            
            ?>
         </table>
         <?php
@@ -85,7 +92,8 @@
                     
                     }
                 }
-            }  */      
+            }  */ 
+                 
        ?>
 
     </div>

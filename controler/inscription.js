@@ -39,15 +39,38 @@ var submit = document.getElementById('submit')
     var erreur2 = document.getElementById("erreur2");
     
    
-    if (email.value.trim() =='')  {
+   /*  if (email.value.trim() =='')  {
        
         erreur2.innerHTML = 'entrer votre email';
         erreur2.style.color = 'red';
        return;
       }
       erreur2.innerHTML = 'cooooooooool!';
-      erreur2.style.color = 'green'; 
-  })
+      erreur2.style.color = 'red';  
+      var erreur2= document.getElementById("erreur2");  */
+
+    
+                 /*  let emailRegExp = new RegExp ( */
+                     /*  '^[a-zA-Z0-9]+[a-zA-Z0-9.-]+[@]{1}[a-zA-Z0-9.-]+[.]{1}[a-z]{2,10}$', 'g'
+                  );
+                  let testEmail = emailRegExp.test(inputemail.value);
+                  console.log(testEmail);
+                 
+                 
+              
+                  if(testEmail){
+                      erreur2.innerHTML = 'email correct';
+               
+                      erreur2.style.color = 'green';
+                      submit();
+              }
+              else {
+                  erreur2.innerHTML = 'mail incorrect';
+                  erreur2.style.color = 'red';  
+                 inputemail.preventDefault();
+              
+              }
+  }) */})
   roles.addEventListener('keyup',function(e){
     var erreur3= document.getElementById("erreur3");
     
@@ -125,8 +148,8 @@ var submit = document.getElementById('submit')
            erreur1.style.color = 'green'; 
         }
        
-         var erreur2 = document.getElementById("erreur2");
-       /*   var expressionReguliere='^[a-zA-Z0-9]+[a-zA-Z0-9.-]+[@]{1}[a-zA-Z0-9.-]+[.]{1}[a-z]{2,10}$'; */
+          var erreur2 = document.getElementById("erreur2");
+         var expressionReguliere='^[a-zA-Z0-9]+[a-zA-Z0-9.-]+[@]{1}[a-zA-Z0-9.-]+[.]{1}[a-z]{2,10}$';
 
          if (email.value.trim() =='')  {
             
@@ -141,7 +164,35 @@ var submit = document.getElementById('submit')
             else{
                 erreur2.innerHTML = 'Email invalide';
                 erreur2.style.color = 'red';  
-            } 
+            }  
+            email.addEventListener('keyup',function(){
+              validemail(this)})
+          
+              /* var erreur4= document.getElementById("erreur4"); */
+              const validemail=function(inputemail){
+                  var erreur2= document.getElementById("erreur2");
+                  let emailRegExp = new RegExp (
+                      '^[a-zA-Z0-9]+[a-zA-Z0-9.-]+[@]{1}[a-zA-Z0-9.-]+[.]{1}[a-z]{2,10}$', 'g'
+                  );
+                  let testEmail = emailRegExp.test(inputemail.value);
+                  console.log(testEmail);
+                 
+              
+              
+                  if(testEmail){
+                      erreur2.innerHTML = 'email correct';
+               
+                      erreur2.style.color = 'green';
+                      submit();
+              }
+              else {
+                  erreur2.innerHTML = 'mail incorrect';
+                  erreur2.style.color = 'red';  
+                 inputemail.preventDefault();
+              
+              }
+              }
+
        
          var erreur3= document.getElementById("erreur3");
          
@@ -171,8 +222,6 @@ var submit = document.getElementById('submit')
            erreur4.style.color = 'green'; 
        }
        
-     
-      
          var erreur5= document.getElementById("erreur5");
          
         
@@ -195,5 +244,29 @@ var submit = document.getElementById('submit')
 } )
 /* setTimeout(function() {
   document.getElementById('submit').innerHTML = "";
-},8000);  */
+},8000);  */ 
+email.addEventListener('change',function(e){
+ verig(this) ;
+})
+
+const verig=function(inputemail){
+  var erreur2 = document.getElementById("erreur2");
+  let emailRegExp = new RegExp (
+      '^[a-zA-Z0-9]+[a-zA-Z0-9.-]+[@]{1}[a-zA-Z0-9.-]+[.]{1}[a-z]{2,10}$', 'g'
+  );
+  let testEmail = emailRegExp.test(inputemail.value);
  
+  if(testEmail){
+      erreur2.innerHTML = 'email correct';
+
+      erreur2.style.color = 'green';
+      submit();
+}
+else {
+  erreur2.innerHTML = 'mail incorrect';
+  erreur2.style.color = 'red';  
+ inputemail.preventDefault();
+
+}
+
+}

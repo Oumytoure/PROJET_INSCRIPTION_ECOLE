@@ -1,6 +1,7 @@
 
 <?php
- include("../model/conection_verif.php");
+ 
+ 
     ?>
 
 
@@ -22,11 +23,13 @@
           <div><img src="images/image.jpeg" alt="" class="border border-dark" style="margin-bottom:70px;"></div>
           <hr  style="width:80%; background-color:black; margin-top:-60px; margin-bottom:40px"/>
           <div class="d-flex flex-column justify-content-center w-50">
-            <form action="" method="post"  id="form"class="d-flex flex-column justify-content-center w-100">
+            <form action="../controler/conection_verif.php" method="post"  id="form"class="d-flex flex-column justify-content-center w-100">
             <div class="col d-flex justify-content-center">
-              <?php if(!empty($message1)); {?>
-                <div style="display:flex; color:red;flex-direction:column;"> <?php echo $message1;  ?> </div> 
-                <?php }?> 
+            <?php                         
+            if(isset($_GET["erreur"])):                         
+              $email = $_GET["erreur"];?>                     
+            <p class="d-flex text-danger justify-content-center fs-2  align-items-center p-2"> <?php echo $email;?></p>    
+              <?php endif; ?>
               </div>
                 <div class="mb-3">
                     <label for="exampleFormControlInput1" class="form-label d-flex justify-content-left">EMAIL<span>*</span></label>
@@ -46,8 +49,8 @@
             </div>
       </div>
      
-      <script src="connection.js"></script>
+      <script src="../controler/connection.js"></script>
   </body>
-  <script src="../controler/connection.js"></script>
+ 
 
 </html >
