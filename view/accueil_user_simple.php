@@ -1,4 +1,7 @@
+<?php
+session_start();
 
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -26,68 +29,33 @@
         </div>
         </header> 
     <div class="container">
-    
-       
-       <div><img src="images/dev1.jpg" alt="" style="width:100px;height:100px;border-radius:50%;margin-top:200px;margin-left:-90px;"></div>
-       <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;">
-    
-       <a href=""><p >ultilisateurs</p></a>
+       <div><img src="<?='data:image/jpg;base64,'.base64_encode($_SESSION['photo'])?>" alt="" style="width:100px;height:100px;border-radius:50%;margin-top:200px;margin-left:-10px;"></div>
+       <div class="Nom"><?= $_SESSION["nom"] ?></div>
+       <div class="Prenom"><?= $_SESSION["prenom"] ?></div>
+       <div class="matricule"><?=$_SESSION["matricule"]?></div>
+
+    <div class="email"><?=$_SESSION["email"]?></div>
+       <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
+     <div style="gap:30px;display:flex;"><a href="acceuil_admin.php"><p >utilisateurs</p></a>
+       <a href="archives.php"><p >archives</p></a>
+       </div>
+       <div >
+             <form action="" method="GET" style="display: flex;gap:15px;margin-bottom:30px;">
+                <input type="search" name="P" placeholder="Entrer nom " class="form-control col-lg-9">
+                <input type="submit" name="verif" value="RECHERCHER" class="btn btn-info">
+            </form> 
+            </div>
        </div>
         <table class="table table-bordered table-hover table-stripped">
-            <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>ROLE</th><th>MATRICULE</th></tr>
+            <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>ROLE</th><th>MATRICULE</th><th>Date_ins</th></tr>
             <?php
                 
-                include("../controler/user_simple_verif.php");
-              /*   $list = "SELECT * FROM INSCRIPTION";
-                $result = $dbco->query($list);
-                while($data = $result->fetch()){
-                $id = $data["id"];
-                $nom = $data["nom"];
-                $prenom = $data["prenom"];
-                $email = $data["email"];
-                $roles = $data["roles"];
-                $matricule = $data["matricule"];
-        
-                echo "<tr><td>$nom</td><td>$prenom</td><td>$email</td><td>$roles</td><td>$matricule</td>";
-                echo "<td style='display:flex; gap: 10px; justify-content:center;'>";
-                echo "<a href='modifier_emploi_du_temps.php?id=$id' class='btn btn-warning'>Modifier</a>";
-                echo "<a href='Modifier_emploi_du_temps1.php?id=$id' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer\")' class='btn btn-danger'>Supprimer</a>";
-                echo "</td";
-                echo "</tr>";
-                } */ /* if(isset($_GET["id"])){
-                $id = $_GET["id"];
-                if(!empty($id) && is_numeric($id)){
-                    include("../controler/connection_bd.php");
-                        $list = "UPDATE INSCRIPTION SET etat = '1' where id=$id";
-                        $result = $dbco->query($list);
-                         header("Location:../view/acceuil_admin.php");
-                        
-                }
-            } */
+                include("../controler/user_simple_verif.php"); 
+              
             
            ?>
         </table>
-        <?php
-           /*  if(isset($_POST["submit"])){
-            if(isset($_POST["id"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["email"]) && isset($_POST["role"]) && isset($_POST["matricule"]))
-            {   
-            if(!empty($_POST["nom"]) && !empty($_POST["prenom"]) && !empty($_POST["email"]) && !empty($_POST["roles"]) && !empty($_POST["matricule"])){
-            $nom = $_POST["nom"];
-            $prenom = $_POST["prenom"];
-            $email = $_POST["email"];
-            $role = $_POST["role"];
-            $matricule = $_POST["matricule"];
-            
-                    include("connection_bd.php");
-                    $list = "UPDATE INSCRIPTION SET nom = '$nom', prenom = '$prenom', email= '$email',roles = '$roles ', matricule = '$matricule' WHERE id  = $id";
-                    $dbco->exec($list);
-                    echo "Modification réussie";
-                    
-                    }
-                }
-            }  */ 
-                 
-       ?>
+      
 
     </div>
 </body>

@@ -29,17 +29,18 @@ session_start();
         </div>
         </header> 
     <div class="container">
-       <div><img src="<?='data:image/jpg;base64,'.base64_encode($_SESSION['photo'])?>" alt="" style="width:100px;height:100px;border-radius:50%;margin-top:200px;margin-left:-90px;"></div>
+       <div><img src="<?='data:image/jpg;base64,'.base64_encode($_SESSION['photo'])?>" alt="" style="width:100px;height:100px;border-radius:50%;margin-top:200px;margin-left:-10px;"></div>
        <div class="Nom"><?= $_SESSION["nom"] ?></div>
        <div class="Prenom"><?= $_SESSION["prenom"] ?></div>
        <div class="matricule"><?=$_SESSION["matricule"]?></div>
-       
+
     <div class="email"><?=$_SESSION["email"]?></div>
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
-    <a href="acceuil_admin.php"><p >utilisateurs</p></a>
+     <div style="gap:30px;display:flex;"><a href="acceuil_admin.php"><p >utilisateurs</p></a>
        <a href="archives.php"><p >archives</p></a>
-       <div style="display: flex; justify-content:center;height:100px; align-items:center;" class="container-fluid">
-             <form action="" method="post" style="display: flex;gap:15px;">
+       </div>
+       <div >
+             <form action="" method="GET" style="display: flex;gap:15px;margin-bottom:30px;">
                 <input type="search" name="P" placeholder="Entrer nom " class="form-control col-lg-9">
                 <input type="submit" name="verif" value="RECHERCHER" class="btn btn-info">
             </form> 

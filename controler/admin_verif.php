@@ -113,9 +113,18 @@
        ?>
  
  <?php
+                 session_start(); 
                 include("connection_bd.php");
-/* 
-                if(isset($_POST["verif"])){
+                $result=$dbco->query('SELECT nom FROM INSCRIPTION ORDER BY id DESC');
+                $verif=$_GET['verif'];
+                $P=$_GET['P'];
+                if(isset($verif) && !empty($P)){
+                    $result = $dbco->query("SELECT * FROM INSCRIPTION WHERE etat=0");
+                
+                    $list=$dbco->query('SELECT * FROM INSCRIPTION WHERE nom LIKE "%'.$P.'%" ORDER BY id DESC');
+                     $list->execute();  
+                        }
+                 /* if(isset($_POST["verif"])){
                     if(isset($_POST["classe"])){
                         $classe = $_POST["classe"];
                         if(!empty($classe)){                   
@@ -132,7 +141,7 @@
                     $nationalite = $data["nationalite"];
                     $archive = $data["archive"]; */
 
-                session_start();
+               /*  session_start(); */
                 $list = "SELECT * FROM INSCRIPTION";
                 $result = $dbco->query($list);
                 while($data = $result->fetch()){
@@ -156,7 +165,7 @@
                 }
             }
            ?>
-        </table>
+        
         <?php
            /*  if(isset($_POST["submit"])){
             if(isset($_POST["id"]) && isset($_POST["nom"]) && isset($_POST["prenom"]) && isset($_POST["email"]) && isset($_POST["role"]) && isset($_POST["matricule"]))

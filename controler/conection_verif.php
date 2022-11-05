@@ -73,7 +73,7 @@ if($_SESSION['roles']==0){
                     $nationalite = $data["nationalite"];
                     $archive = $data["archive"]; */
 
-                session_start();
+                // session_start();
                 $list = "SELECT * FROM INSCRIPTION";
                 $result = $dbco->query($list);
                 while($data = $result->fetch()){

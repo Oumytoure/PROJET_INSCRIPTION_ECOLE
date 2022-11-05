@@ -285,8 +285,8 @@ session_start();
 include '../controler/connection_bd.php';
 if(isset($_GET['updateid'])){
    
-    $ID =$_GET['updateid'];
-    $sth = $dbco->prepare("SELECT * FROM INSCRIPTION where id=$ID");
+    $id =$_GET['updateid'];
+    $sth = $dbco->prepare("SELECT * FROM INSCRIPTION where id=$id");
 
     $sth->execute();
     if ($sth->rowCount() > 0) {
@@ -307,17 +307,16 @@ if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
     $sthModifPersonne=$dbco->prepare("UPDATE INSCRIPTION SET nom='$nom',prenom='$prenom',email='$email' WHERE id=$id");
 
     $sthModifPersonne->execute();
-    /* var_dump($sthModifPersonne);
-    die; */
-   /*  header('Location:acceuil_admin.php?modif=modification réussie'); */
+    
+    
     if($sthModifPersonne){
     
-      
+      header('Location:acceuil_admin.php?'); 
     
     }else { die('Erreur : '.$e->getMessage());}
    
 }
-https://github.com/Oumytoure/PROJET_INSCRIPTION_ECOLE.git
+
 }
 
 
@@ -327,14 +326,14 @@ https://github.com/Oumytoure/PROJET_INSCRIPTION_ECOLE.git
 <!doctype html>
 <html lang="en">
   <head>
-    <!-- Required meta tags -->
+   
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="laReussite.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/431fa92df2.js" crossorigin="anonymous"></script>
-    <!-- Bootstrap CSS -->
+   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
 
     <title>modification</title>
@@ -376,11 +375,9 @@ https://github.com/Oumytoure/PROJET_INSCRIPTION_ECOLE.git
 
       </div>
       <br>
-     <!--  <div class="col-6">
-        <input type="submit" id="submit" name="submit"  class="btn btn-primary" style="background-color:#05006B">
-      </div>  -->
+    
       <div class="col-12">
-       <a href="acceuil_admin.php"> <button type="submit" class="btn btn-primary" name="submit">Modifier</button><! </a>  
+        <button type="submit" class="btn btn-primary" name="submit">Modifier</button>
             </div> 
       <script src=""></script>
     </form>
