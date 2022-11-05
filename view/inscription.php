@@ -100,7 +100,7 @@
 
       
 
-        <form id="form" class="container row w-100 needs-validation d-flex" method="post" action="../controler/incription_verif.php">
+        <form id="form" class="container row w-100 needs-validation d-flex" method="post" action="../controler/incription_verif.php" enctype="multipart/form-data">
         <div class="col-lg-12  d-flex justify-content-center">
         <?php 
         if(isset($_GET["erreur"])):                         
@@ -155,7 +155,7 @@
           </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">PHOTO</label>
-            <input type="file" id="photo" name="photo" class="form-control mb-3 border border-dark" placeholder="entrer votre photo" >
+            <input type="file" id="photo" name="image" class="form-control mb-3 border border-dark" placeholder="entrer votre photo" >
             
           </div>
           <div class="col-lg-6">

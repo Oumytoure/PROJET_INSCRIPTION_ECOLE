@@ -5,15 +5,16 @@ error_reporting(E_ALL);
 $message="";
 $message1="";
 
-@$prenom = $_POST["prenom"];
+
+
+if (isset($_POST["submit"])) {
+  @$prenom = $_POST["prenom"];
 @$nom = $_POST["nom"];
 @$email = $_POST["email"];
 @$roles = $_POST["roles"];
 @$mot_passe = md5($_POST["mot_passe"]);
-@$photo = $_POST["photo"];
-
-if (isset($_POST["submit"])) {
-  if (isset($_POST["prenom"]) && isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["roles"]) && isset($_POST["photo"])) {
+@$Photo=file_get_contents($_FILES['image']['tmp_name']);
+  if (isset($_POST["prenom"]) && isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["roles"]) /* && isset($_POST["photo"]) */) {
     if (!empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["roles"])) {
 
 
@@ -30,12 +31,12 @@ if (isset($_POST["submit"])) {
       $sth = $dbco->prepare(" INSERT INTO INSCRIPTION(prenom,nom,email,roles,mot_passe,photo)
     VALUES (?, ?, ?, ?, ?, ?) ");
 
-      $sth->bindValue(1, $prenom);
-      $sth->bindValue(2, $nom);
-      $sth->bindValue(3, $email);
-      $sth->bindValue(4, $roles);
-      $sth->bindValue(5, $mot_passe);
-      $sth->bindValue(6, $photo);
+      $sth->bindParam(1, $prenom);
+      $sth->bindParam(2, $nom);
+      $sth->bindParam(3, $email);
+      $sth->bindParam(4, $roles);
+      $sth->bindParam(5, $mot_passe);
+      $sth->bindParam(6, $photo);
       $sth->execute();
       header("location:../view/inscription.php?erreur=Enregistrement valide !");
      
