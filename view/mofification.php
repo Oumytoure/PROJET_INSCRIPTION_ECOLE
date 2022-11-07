@@ -2,6 +2,7 @@
 <?php
 
 include '../controler/connection_bd.php';
+
 if(isset($_GET['updateid'])){
    
     $id =$_GET['updateid'];
@@ -84,7 +85,7 @@ if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
       <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Nom*</label>
         <input type="text" class="form-control" id="nom" name="nom" value="<?= $check["nom"] ?? null  ?>" placeholder="NOM">
-      
+        
 
       </div>
       <div class="col-6">

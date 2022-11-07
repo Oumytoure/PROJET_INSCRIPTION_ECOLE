@@ -1,8 +1,6 @@
-<?php 
-         session_start();
-         include("connection_bd.php");
-       ?>
+
  
+
  <?php
                 include("connection_bd.php");
                 $id=$data['id'];

@@ -23,6 +23,7 @@ if($_SESSION['roles']==0){
                   $res = $sth->fetch(PDO::FETCH_ASSOC); 
                 
                   if(count($res) > 0  && $res['roles'] == 'ADMINISTRATEUR'){ 
+                    $_SESSION["id"]=$res["id"];
                     $_SESSION["nom"]=$res["nom"].' '.$res["prenom"];
                     $_SESSION["prenom"]=$res["email"];
                     $_SESSION["matricule"]=$res["matricule"];
@@ -31,7 +32,8 @@ if($_SESSION['roles']==0){
                       header("Location:../view/acceuil_admin.php");
                   }
                   else if(count($res) > 0 && $res['roles'] == 'UTILISATEUR'){
-                    $_SESSION["nom"]=$res["nom"].''.$res["prenom"];
+                    $_SESSION["id"]=$res["id"];
+                    $_SESSION["nom"]=$res["nom"].' '.$res["prenom"];
                     $_SESSION["prenom"]=$res["email"];
                     $_SESSION["matricule"]=$res["matricule"];
                     $_SESSION["photo"]=$res["photo"];
@@ -55,25 +57,7 @@ if($_SESSION['roles']==0){
         ?>
         <?php
                 include("../controler/connection_bd.php");
-/* 
-                if(isset($_POST["verif"])){
-                    if(isset($_POST["classe"])){
-                        $classe = $_POST["classe"];
-                        if(!empty($classe)){                   
-                include("Connection_dba.php");
-                $list = "SELECT * FROM inscription WHERE classe LIKE '%$classe%' OR prenom LIKE '%$classe%'";
-                $result = $dbco->query($list);
-                while($data = $result->fetch()){
-                    $id = $data["id_ins"];
-                    $prenom = $data["prenom"];
-                    $nom = $data["nom"];
-                    $adresse = $data["adresse"];
-                    $sexe = $data["sexe"];
-                    $cla = $data["classe"];
-                    $nationalite = $data["nationalite"];
-                    $archive = $data["archive"]; */
 
-                // session_start();
                 $list = "SELECT * FROM INSCRIPTION";
                 $result = $dbco->query($list);
                 while($data = $result->fetch()){
