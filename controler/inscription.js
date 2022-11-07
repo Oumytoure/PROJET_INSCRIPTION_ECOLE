@@ -19,7 +19,7 @@ var submit = document.getElementById('submit')
        erreur.style.color = 'red';
       return;
      }
-     erreur.innerHTML = 'cooooooooool!';
+     erreur.innerHTML = '';
      erreur.style.color = 'green'; 
  })
  nom.addEventListener('keyup',function(e){
@@ -32,7 +32,7 @@ var submit = document.getElementById('submit')
         erreur1.style.color = 'red';
        return;
       }
-      erreur1.innerHTML = 'cooooooooool!';
+      erreur1.innerHTML = '';
       erreur1.style.color = 'green'; 
   })
   email.addEventListener('keyup',function(e){
@@ -81,7 +81,7 @@ var submit = document.getElementById('submit')
         erreur3.style.color = 'red';
        return;
       }
-      erreur3.innerHTML = 'cooooooooool!';
+      erreur3.innerHTML = '';
       erreur3.style.color = 'green'; 
   })
   mot_passe.addEventListener('keyup',function(e){
@@ -94,7 +94,7 @@ var submit = document.getElementById('submit')
         erreur4.style.color = 'red';
        return;
       }
-      erreur4.innerHTML = 'cooooooooool!';
+      erreur4.innerHTML = '';
       erreur4.style.color = 'green'; 
   })
   
@@ -114,7 +114,7 @@ var submit = document.getElementById('submit')
         erreur5.style.color = 'red';
         return;
     } 
-    erreur5.innerHTML = 'cooooooooool!';
+    erreur5.innerHTML = '';
         erreur5.style.color = 'green'; 
   })
 
@@ -130,7 +130,7 @@ var submit = document.getElementById('submit')
            e.preventDefault();
           }
           else{ 
-          erreur.innerHTML = 'cooooooooool!';
+          erreur.innerHTML = '';
           erreur.style.color = 'green'; 
         }
     
@@ -144,7 +144,7 @@ var submit = document.getElementById('submit')
              e.preventDefault();
            }
            else{
-           erreur1.innerHTML = 'cooooooooool!';
+           erreur1.innerHTML = '';
            erreur1.style.color = 'green'; 
         }
        
@@ -158,7 +158,7 @@ var submit = document.getElementById('submit')
              e.preventDefault();
            }
            else if(email.value.match(expressionReguliere)) {
-           erreur2.innerHTML = 'cooooooooool!';
+           erreur2.innerHTML = '';
            erreur2.style.color = 'green'; 
             }    
             else{
@@ -204,7 +204,7 @@ var submit = document.getElementById('submit')
              e.preventDefault();
            }
            else{
-           erreur3.innerHTML = 'cooooooooool!';
+           erreur3.innerHTML = '';
            erreur3.style.color = 'green'; 
             }
        
@@ -218,7 +218,7 @@ var submit = document.getElementById('submit')
              e.preventDefault();
            }
            else{
-           erreur4.innerHTML = 'cooooooooool!';
+           erreur4.innerHTML = '';
            erreur4.style.color = 'green'; 
        }
        
@@ -237,7 +237,7 @@ var submit = document.getElementById('submit')
              e.preventDefault();
          } 
          else{
-         erreur5.innerHTML = 'cooooooooool!';
+         erreur5.innerHTML = '';
              erreur5.style.color = 'green'; 
        } 
  

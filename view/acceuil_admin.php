@@ -40,7 +40,7 @@ session_start();
        <a href="archives.php"><p >archives</p></a>
        </div>
        <div >
-             <form action="" method="GET" style="display: flex;gap:15px;margin-bottom:30px;">
+             <form action="" method="post" style="display: flex;gap:15px;margin-bottom:30px;">
                 <input type="search" name="P" placeholder="Entrer nom " class="form-control col-lg-9">
                 <input type="submit" name="verif" value="RECHERCHER" class="btn btn-info">
             </form> 
@@ -51,11 +51,23 @@ session_start();
             <?php
                 
                 include("../controler/admin_verif.php"); 
-              
+             
             
            ?>
         </table>
-      
+        <?php
+       /*  if ($allusers-> rowCount()>0){
+                    while($user=$allusers->fetch()){
+                        ?> 
+                        <p><?=$user['nom'];?> =</p>
+                        <?php
+                    }
+
+                }else
+                ?> 
+                <p>Accun utilisateurs trouvé</p>
+                <?php */
+       ?>
 
     </div>
 </body>

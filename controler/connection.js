@@ -25,9 +25,9 @@ form.addEventListener('submit',function(e){
         e.preventDefault();
      }
      else{
-         erreur2.innerHTML = 'cool';
+         erreur2.innerHTML = '';
          erreur2.style.color = 'green';  
-         erreur4.innerHTML = 'cooooooooool!';
+         erreur4.innerHTML = '';
          erreur4.style.color = 'green'; 
          submit();
         
@@ -80,7 +80,7 @@ form.addEventListener('submit',function(e){
     
     
         if(testEmail){
-            erreur2.innerHTML = 'email correct';
+            erreur2.innerHTML = '';
      
             erreur2.style.color = 'green';
             submit();

@@ -22,7 +22,7 @@ if($_SESSION['roles']==0){
                   $sth->execute();
                   $res = $sth->fetch(PDO::FETCH_ASSOC); 
                 
-                  if(count($res) > 0 && $mot_passe == $res['mot_passe'] && $res['roles'] == 'ADMINISTRATEUR'){ 
+                  if(count($res) > 0  && $res['roles'] == 'ADMINISTRATEUR'){ 
                     $_SESSION["nom"]=$res["nom"].' '.$res["prenom"];
                     $_SESSION["prenom"]=$res["email"];
                     $_SESSION["matricule"]=$res["matricule"];
@@ -30,7 +30,7 @@ if($_SESSION['roles']==0){
                   
                       header("Location:../view/acceuil_admin.php");
                   }
-                  else if(count($res) > 0 && $mot_passe == $res['mot_passe'] && $res['roles'] == 'UTILISATEUR'){
+                  else if(count($res) > 0 && $res['roles'] == 'UTILISATEUR'){
                     $_SESSION["nom"]=$res["nom"].''.$res["prenom"];
                     $_SESSION["prenom"]=$res["email"];
                     $_SESSION["matricule"]=$res["matricule"];
