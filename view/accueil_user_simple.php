@@ -30,11 +30,10 @@ session_start();
         </header> 
     <div class="container">
        <div><img src="<?='data:image/jpg;base64,'.base64_encode($_SESSION['photo'])?>" alt="" style="width:100px;height:100px;border-radius:50%;margin-top:200px;margin-left:-10px;"></div>
-       <div class="Nom"><?= $_SESSION["nom"] ?></div>
-       <div class="Prenom"><?= $_SESSION["prenom"] ?></div>
+       <div class="Nom"><?= $_SESSION["nom"].' '.$_SESSION["nom"]?></div>
        <div class="matricule"><?=$_SESSION["matricule"]?></div>
 
-    <div class="email"><?=$_SESSION["email"]?></div>
+    
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
      <div style="gap:30px;display:flex;"><a href="acceuil_admin.php"><p >utilisateurs</p></a>
        <a href="archives.php"><p >archives</p></a>

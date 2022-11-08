@@ -1,6 +1,15 @@
 <?php
 session_start();
 
+// On détermine sur quelle page on se trouve
+if(isset($_GET['page']) && !empty($_GET['page'])){
+    $currentPage = (int) strip_tags($_GET['page']);
+}else{
+    $currentPage = 1;
+
+
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -18,11 +27,11 @@ session_start();
 <body>
 <header>
 <div class="logo container-fluid" style="position:fixed;width:100%; height: 150px;background-color:#0c82d1;display:flex;align-items:center;top:0px;" >
-            <div class="container-fluid"><img src="images/image.jpeg" alt=""data-toggle="modal" data-target="#exampleModal" style="float: left;"></div>
+<div class="container-fluid"><img src="images/image.jpeg" alt=""data-toggle="modal" data-target="#exampleModal" style="float: left;"></div>
                 <div class="menu" >
-                    <nav class="navbar navbar-expand-lg " style="background-color:#0c82d1;">
+                    <nav class="navbar navbar-expand-lg ">
                         <div class="container-fluid" >
-                        <a ><button class="btn btn-outline-success" type="submit" style="background-color:white;"><a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket"></i>Deconnection</button></a>
+                        <a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i>Deconnection</a>
                       </div>
                    </nav>
              </div>
@@ -30,11 +39,10 @@ session_start();
         </header> 
     <div class="container">
        <div><img src="<?='data:image/jpg;base64,'.base64_encode($_SESSION['photo'])?>" alt="" style="width:100px;height:100px;border-radius:50%;margin-top:200px;margin-left:-10px;"></div>
-       <div class="Nom"><?= $_SESSION["nom"] ?></div>
-       <div class="Prenom"><?= $_SESSION["prenom"] ?></div>
+       <div class="Nom"><?= $_SESSION["prenom" ].' '.$_SESSION["nom"]  ?></div>
        <div class="matricule"><?=$_SESSION["matricule"]?></div>
 
-    <div class="email"><?=$_SESSION["email"]?></div>
+    
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
      <div style="gap:30px;display:flex;"><a href="acceuil_admin.php"><p >utilisateurs</p></a>
        <a href="archives.php"><p >archives</p></a>
@@ -55,19 +63,7 @@ session_start();
             
            ?>
         </table>
-        <?php
-       /*  if ($allusers-> rowCount()>0){
-                    while($user=$allusers->fetch()){
-                        ?> 
-                        <p><?=$user['nom'];?> =</p>
-                        <?php
-                    }
-
-                }else
-                ?> 
-                <p>Accun utilisateurs trouvé</p>
-                <?php */
-       ?>
+       
 
     </div>
 </body>

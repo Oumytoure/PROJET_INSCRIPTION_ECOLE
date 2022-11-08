@@ -22,9 +22,9 @@ if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
     $email=$_POST['email'];			
   
     $id=$_GET['updateid'];	
-    $date_modif=date('y-m-d h:i:s');
+    $date_modif=date('y-m-d');
   
-    $sthModifPersonne=$dbco->prepare("UPDATE INSCRIPTION SET nom='$nom',prenom='$prenom',email='$email' WHERE id=$id");
+    $sthModifPersonne=$dbco->prepare("UPDATE INSCRIPTION SET nom='$nom',prenom='$prenom',email='$email',date_modif='$date_modif' WHERE id=$id");
 
     $sthModifPersonne->execute();
     

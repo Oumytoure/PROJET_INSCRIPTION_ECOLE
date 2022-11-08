@@ -1,9 +1,15 @@
 
- 
-
+     <?php
+// On détermine sur quelle page on se trouve
+if(isset($_GET['page']) && !empty($_GET['page'])){
+    $currentPage = (int) strip_tags($_GET['page']);
+}else{
+    $currentPage = 1;
+}
+?>
  <?php
                 include("connection_bd.php");
-                $id=$data['id'];
+                $id=$_SESSION['id'];
                 $list = "SELECT * FROM INSCRIPTION where etat=0 and id!='$id'";
                 $result = $dbco->query($list);
                 
@@ -31,9 +37,9 @@
            
                 echo "<tr><td>$nom</td><td>$prenom</td><td>$email</td><td>$roles</td><td>$matricule</td>";
                 echo "<td style='display:flex; gap: 10px; justify-content:center;'>";
-                echo "<a href='acceuil_admin.php?id=$id' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer\")'><i class='bi bi-archive'></i></a>";
-                echo "<a href='../view/mofification.php?updateid=". $id ."' ><i class='fa-solid fa-pen-to-square'></i></a>";
-                echo "<a href='acceuil_admin.php?id_roles=$id' ><i class='fa-solid fa-rotate-right'></i></a>";
+                echo "<a title='archiver' href='acceuil_admin.php?id=$id' onclick='return confirm(\"Êtes-vous sûr de vouloir supprimer\")'><i class='bi bi-archive'></i></a>";
+                echo "<a title='modifier' href='../view/mofification.php?updateid=". $id ."' ><i class='fa-solid fa-pen-to-square'></i></a>";
+                echo "<a title='switch' href='acceuil_admin.php?id_roles=$id' ><i class='fa-solid fa-rotate-right'></i></a>";
                 echo "</td";
                 echo "</tr>";
                 }
@@ -41,7 +47,15 @@
            ?>
         
         <?php
-            
+            $id=$_GET['id'];	
+            $date_archive=date('y-m-d');
+ 
+             if(isset($_GET["id"])){
+                 $id = $_GET["id"];
+                 $sthArchivePersonne=$dbco->prepare("UPDATE INSCRIPTION SET etat='0',date_archive='$date_archive'  WHERE id=$id");
+                 $sthArchivePersonne->execute(); 
+                }
+
             if(isset($_GET["id"])){
                 $id = $_GET["id"];
                 if(!empty($id) && is_numeric($id)){
@@ -76,3 +90,16 @@
         
 
        ?>
+
+
+
+
+
+
+
+
+
+
+
+ 
+       
