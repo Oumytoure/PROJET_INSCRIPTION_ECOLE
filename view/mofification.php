@@ -31,7 +31,7 @@ if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
     
     if($sthModifPersonne){
     
-      header('Location:../view/acceuil_admin.php?'); 
+      header('Location:../controler/pagination.php?'); 
     
     }else { die('Erreur : '.$e->getMessage());}
    

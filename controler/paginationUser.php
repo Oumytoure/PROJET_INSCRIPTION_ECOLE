@@ -2,68 +2,57 @@
 session_start();
 // On se connecte à là base de données
 include('connection_bd.php');
-$id=$_SESSION['id'];
 
-if(isset($_POST['verif']) && isset($_POST['P'])){
-    $recherche=htmlspecialchars($_POST['P']);
-    
-        $query=$dbco->prepare("SELECT * FROM `INSCRIPTION` WHERE nom=:nom and etat=0 ");
+$sql = 'SELECT * FROM `INSCRIPTION` ORDER BY `id` DESC;';
 
-        $query->execute(['nom' => $recherche]);
+// On prépare la requête
+$query = $dbco->prepare($sql);
 
-    }
-  else{
-    $sql = 'SELECT * FROM `INSCRIPTION` ORDER BY `id` DESC;';
+// On exécute
+$query->execute();
 
-    // On prépare la requête
-    $query = $dbco->prepare($sql);
-    
-    // On exécute
-    $query->execute();
-    
-    // On récupère les valeurs dans un tableau associatif
-    $users = $query->fetchAll(PDO::FETCH_ASSOC);
-    /* var_dump($users);
-    die; */
-    
-    // On détermine sur quelle page on se trouve
-    if(isset($_GET['page']) && !empty($_GET['page'])){
-        $currentPage = (int) strip_tags($_GET['page']);
-    }else{
-        $currentPage = 1;
-    }
-    // On détermine le nombre total d'articles
-    $sql = 'SELECT COUNT(*) AS matricule FROM `INSCRIPTION`;';
-    
-    // On prépare la requête
-    $query = $dbco->prepare($sql);
-    
-    // On exécute
-    $query->execute();
-    
-    // On récupère le nombre d'articles
-    $result = $query->fetch();
-    
-    $nbusers = (int) $result['matricule'];
-    
-    // On détermine le nombre d'articles par page
-    $parPage = 5;
-    
-    // On calcule le nombre de pages total
-    $pages = ceil($nbusers / $parPage);
-    
-    // Calcul du 1er article de la page
-    $premier = ($currentPage * $parPage) - $parPage;
-    $sql = 'SELECT * FROM `INSCRIPTION` WHERE etat=0  AND id!=:id ORDER BY `matricule` DESC LIMIT :premier, :parpage;';
-    
-    // On prépare la requête
-    $query = $dbco->prepare($sql);
-    $query->bindValue(':id', $id, PDO::PARAM_INT);
-    $query->bindValue(':premier', $premier, PDO::PARAM_INT);
-    $query->bindValue(':parpage', $parPage, PDO::PARAM_INT);
-    
-  }
- // On exécute
+// On récupère les valeurs dans un tableau associatif
+$users = $query->fetchAll(PDO::FETCH_ASSOC);
+/* var_dump($users);
+die; */
+
+// On détermine sur quelle page on se trouve
+if(isset($_GET['page']) && !empty($_GET['page'])){
+    $currentPage = (int) strip_tags($_GET['page']);
+}else{
+    $currentPage = 1;
+}
+// On détermine le nombre total d'articles
+$sql = 'SELECT COUNT(*) AS matricule FROM `INSCRIPTION`;';
+
+// On prépare la requête
+$query = $dbco->prepare($sql);
+
+// On exécute
+$query->execute();
+
+// On récupère le nombre d'articles
+$result = $query->fetch();
+
+$nbusers = (int) $result['matricule'];
+
+// On détermine le nombre d'articles par page
+$parPage = 5;
+
+// On calcule le nombre de pages total
+$pages = ceil($nbusers / $parPage);
+
+// Calcul du 1er article de la page
+$premier = ($currentPage * $parPage) - $parPage;
+$sql = 'SELECT * FROM `INSCRIPTION` WHERE etat=1 ORDER BY `matricule` DESC LIMIT :premier, :parpage;';
+
+// On prépare la requête
+$query = $dbco->prepare($sql);
+
+$query->bindValue(':premier', $premier, PDO::PARAM_INT);
+$query->bindValue(':parpage', $parPage, PDO::PARAM_INT);
+
+// On exécute
 $query->execute();
 
 // On récupère les valeurs dans un tableau associatif
@@ -72,10 +61,6 @@ $id = $users["id"];
 /* var_dump($id);
 die; */
 /*  include("modifRole.php"); */
-
-
-
-
 
 ?>
 
@@ -95,12 +80,12 @@ die; */
 <body>
 <header>
 <div class="logo container-fluid" style="position:fixed;width:100%; height: 150px;background-color:#0c82d1;display:flex;align-items:center;top:0px;" >
-<div class="container-fluid"><img src="../view/images/image.jpeg" alt=""data-toggle="modal" data-target="#exampleModal" style="float: left;"></div>
+<div class="container-fluid"><img src="images/image.jpeg" alt=""data-toggle="modal" data-target="#exampleModal" style="float: left;"></div>
                 <div class="menu" >
                     <nav class="navbar navbar-expand-lg ">
                         <div class="container-fluid" >
                             <h1 style="display:flex; justify-content:center;">ESPACE ADMINISTRATEUR</h1>
-                        <a href="../view/connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i><!-- Deconnection --></a>
+                        <a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i><!-- Deconnection --></a>
                       </div>
                    </nav>
              </div>
@@ -136,9 +121,8 @@ die; */
            <td> <?= $person["matricule"]  ?>  </td>
             <td style='display:flex; gap: 10px; justify-content:center;'>
                  
-                 <a title='archiver' href='Modifarchivage.php?id=<?=$person['id'];?> ' onclick='return confirm("Êtes-vous sûr de vouloir supprimer")'><i class='bi bi-archive'></i></a>
-                <a title='modifier' href='../view/mofification.php?updateid=<?=$person['id'];?>  ' ><i class='fa-solid fa-pen-to-square'></i></a>
-                <a title='switch' href='modifRole.php?id_roles=<?=$person['id'];?>  ' ><i class='fa-solid fa-rotate-right'></i></a>
+                 <a title='archiver' href='ARCHIVER_VERIF.php?id=<?=$person['id'];?> ' onclick='return confirm("Êtes-vous sûr de vouloir désarchiver")'><i class='bi bi-archive'></i></a>
+             
             </td>
            </tr>
              

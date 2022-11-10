@@ -1,15 +1,6 @@
 <?php
 session_start();
 
-// On détermine sur quelle page on se trouve
-if(isset($_GET['page']) && !empty($_GET['page'])){
-    $currentPage = (int) strip_tags($_GET['page']);
-}else{
-    $currentPage = 1;
-
-
-}
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +22,8 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
                 <div class="menu" >
                     <nav class="navbar navbar-expand-lg ">
                         <div class="container-fluid" >
-                        <a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i>Deconnection</a>
+                            <div ><h1 style="display:flex; justify-content:center;">ESPACE ADMINISTRATEUR</h1></div>
+                        <a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i><!-- Deconnection --></a>
                       </div>
                    </nav>
              </div>
@@ -44,8 +36,8 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
 
     
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
-     <div style="gap:30px;display:flex;"><a href="acceuil_admin.php"><p >utilisateurs</p></a>
-       <a href="archives.php"><p >archives</p></a>
+     <div style="gap:30px;display:flex;"><a href="acceuil_admin.php"><p >utilisateurs Actifs</p></a>
+       <a href="archives.php"><p >utilisateurs Inactifs</p></a>
        </div>
        <div >
              <form action="" method="post" style="display: flex;gap:15px;margin-bottom:30px;">
@@ -63,6 +55,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
             
            ?>
         </table>
+
        
 
     </div>

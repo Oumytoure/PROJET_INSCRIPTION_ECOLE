@@ -35,8 +35,8 @@ session_start();
        <div class="matricule"><?=$_SESSION["matricule"]?></div>
 
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
-     <div style="gap:30px;display:flex;"><a href="acceuil_admin.php"><p >utilisateurs</p></a>
-       <a href="archives.php"><p>archives</p></a>
+     <div style="gap:30px;display:flex;"><a href="../controler/pagination.php"><p >utilisateurs Actifs</p></a>
+       <a href="archives.php"><p>utilisateurs Inactifs</p></a>
        </div>
        <div >
              <form action="" method="post" style="display: flex;gap:15px;margin-bottom:30px;">
@@ -50,7 +50,7 @@ session_start();
        
        
         <table class="table table-bordered table-hover table-stripped">
-            <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>ROLE</th><th>MATRICULE</th><th>ACTIONS</th></tr>
+            <tr><th>NOM</th><th>PRENOM</th><th>MATRICULE</th><th>DATE D'ARCHIVAGE</th><th>ACTIONS</th></tr>
             <?php
                 
                 include("../controler/ARCHIVER_VERIF.php");

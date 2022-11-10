@@ -16,7 +16,7 @@ if (isset($_POST["submit"])) {
 
   if (isset($_POST["prenom"]) && isset($_POST["nom"]) && isset($_POST["email"]) && isset($_POST["roles"]) /* && isset($_POST["photo"]) */) {
     if (!empty($_POST["prenom"]) && !empty($_POST["nom"]) && !empty($_POST["email"]) && !empty($_POST["roles"])) {
-
+ 
      if (!empty($_FILES["image"])) {
         $photo = file_get_contents($_FILES['image']['tmp_name']) ?? null;
       } 

@@ -1,13 +1,6 @@
 
-     <?php
-// On détermine sur quelle page on se trouve
-if(isset($_GET['page']) && !empty($_GET['page'])){
-    $currentPage = (int) strip_tags($_GET['page']);
-}else{
-    $currentPage = 1;
-}
-?>
  <?php
+                 session_start();
                 include("connection_bd.php");
                 $id=$_SESSION['id'];
                 $list = "SELECT * FROM INSCRIPTION where etat=0 and id!='$id'";

@@ -1,6 +1,6 @@
 
 <?php
-     session_start();
+     
     ini_set("display_errors", "1");
     error_reporting(E_ALL);
     $message1=""; 
@@ -18,20 +18,37 @@ if($_SESSION['roles']==0){
        
                    try{
                     include("connection_bd.php");
-                  $sth = $dbco->prepare(" SELECT * FROM INSCRIPTION WHERE email = '".$email."'"); 
+                  $sth = $dbco->prepare(" SELECT * FROM INSCRIPTION WHERE email = '".$email."' AND mot_passe = '".$mot_passe."'"); 
                   $sth->execute();
-                  $res = $sth->fetch(PDO::FETCH_ASSOC); 
-                
-                  if(count($res) > 0  && $res['roles'] == 'ADMINISTRATEUR' && $res['etat'] ==0 ){ 
+                  $res = $sth->fetchAll(PDO::FETCH_ASSOC);
+                   
+                  
+                   
+                    if (count($res) == 0) {
+                        $message = "Compte introuvable, inscrivez-vous";
+                        header("location:../view/connection.php?erreur=Compte introuvable, inscrivez-vous");
+                    } else {
+        
+                      $ins = $dbco->prepare(" SELECT  id,roles,nom,prenom,matricule,photo,etat  FROM  INSCRIPTION WHERE email = '".$email."'");
+                        $ins->execute();
+                        $row = $ins->fetch(PDO::FETCH_ASSOC);
+                        $role = $row['roles'];
+                        $etat = $row['etat'];
+
+
+
+
+                 
+                  if( $role == 'ADMINISTRATEUR' && $etat ==0 ){ 
                     $_SESSION["id"]=$res["id"];
                     $_SESSION["prenom"]=$res["prenom"];
                     $_SESSION["nom"]=$res["nom"];
                     $_SESSION["matricule"]=$res["matricule"];
                     $_SESSION["photo"]=$res["photo"];
                   
-                      header("Location:../view/acceuil_admin.php");
+                      header("Location:pagination.php");
                   }
-                  else if(count($res) > 0 && $res['roles'] == 'UTILISATEUR' && $res['etat'] ==0 ){
+                  else if( $role == 'UTILISATEUR' && $etat ==0 ){
                     $_SESSION["id"]=$res["id"];
                     $_SESSION["prenom"]=$res["prenom"];
                     $_SESSION["nom"]=$res["nom"]; 
@@ -39,19 +56,19 @@ if($_SESSION['roles']==0){
                     $_SESSION["photo"]=$res["photo"];
                       header("Location:../view/accueil_user_simple.php");
                   }  
-                  else if( $res['etat'] ==1 ){
+                  else if($etat ==1 ){
                     
                       header("Location:../view/connection.php?erreur=Vous êtes archiver ,vous n'avez pas de compte");
                   }  
                     
                   else
                   {
-                      header("location:../view/connection.php?erreur=Vous n'êtes pas dans la base de données, inscrivez-vous");
+                    header("Location:../view/connection.php?erreur=Vous n'êtes pas dans la base de données, inscrivez-vous");
                   
                   }
                     
                   }
-                  
+                }
                   catch(PDOException $e){ echo ("Erreur:".$e->getMessage());}
              
                    } 
