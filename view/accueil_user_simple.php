@@ -37,7 +37,7 @@ if(isset($_POST['verif']) && isset($_POST['P'])){
         $currentPage = 1;
     }
     // On détermine le nombre total d'articles
-    $sql = 'SELECT COUNT(*) AS matricule FROM `INSCRIPTION`;';
+    $sql = 'SELECT COUNT(*) AS nbr FROM `INSCRIPTION` WHERE etat=0';
     
     // On prépare la requête
     $query = $dbco->prepare($sql);
@@ -48,7 +48,7 @@ if(isset($_POST['verif']) && isset($_POST['P'])){
     // On récupère le nombre d'articles
     $result = $query->fetch();
     
-    $nbusers = (int) $result['matricule'];
+    $nbusers = (int) $result['nbr'];
     
     // On détermine le nombre d'articles par page
     $parPage = 5;
@@ -58,7 +58,7 @@ if(isset($_POST['verif']) && isset($_POST['P'])){
     
     // Calcul du 1er article de la page
     $premier = ($currentPage * $parPage) - $parPage;
-    $sql = 'SELECT * FROM `INSCRIPTION` WHERE etat=0   AND id!=:id  ORDER BY `matricule` DESC LIMIT :premier, :parpage;';
+    $sql = 'SELECT * FROM `INSCRIPTION` WHERE etat=0   AND id!=:id  ORDER BY `matricule` ASC LIMIT :premier, :parpage;';
     
     // On prépare la requête
     $query = $dbco->prepare($sql);
@@ -116,8 +116,8 @@ $users = $query->fetchAll(PDO::FETCH_ASSOC);
 
     
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
-     <div style="gap:30px;display:flex;"><a href="pagination.php"><p >utilisateurs Actifs</p></a>
-       <a href="paginationUser.php"><p >utilisateurs Inactifs</p></a>
+     <div style="gap:30px;display:flex;"><a href="../view/accueil_user_simple.php"><p >utilisateurs Actifs</p></a>
+
        </div>
        <div >
              <form action="" method="post" style="display: flex;gap:15px;margin-bottom:30px;">

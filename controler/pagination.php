@@ -37,7 +37,7 @@ if(isset($_POST['verif']) && isset($_POST['P'])){
         $currentPage = 1;
     }
     // On détermine le nombre total d'articles
-    $sql = 'SELECT COUNT(*) AS matricule FROM `INSCRIPTION`;';
+    $sql = 'SELECT COUNT(*) AS matricule FROM `INSCRIPTION` WHERE etat=0';
     
     // On prépare la requête
     $query = $dbco->prepare($sql);
@@ -117,7 +117,7 @@ $users = $query->fetchAll(PDO::FETCH_ASSOC);
     
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
      <div style="gap:30px;display:flex;"><a href="pagination.php"><p >utilisateurs Actifs</p></a>
-       <a href="paginationUser.php"><p >utilisateurs Inactifs</p></a>
+       <a href="paginationUser.php"><p style="color:darkgrey; text-decoration:none; ">utilisateurs Inactifs</p></a>
        </div>
        <div >
              <form action="" method="post" style="display: flex;gap:15px;margin-bottom:30px;">
@@ -156,7 +156,7 @@ $users = $query->fetchAll(PDO::FETCH_ASSOC);
         <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
             <a href="?page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
         </li>
-        <?php for($page = 1; $page <= $pages; $page++): ?>
+        <?php for(@$page = 1; @$page <= @$pages; @$page++): ?>
             <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
             <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
                 <a href="?page=<?= $page ?>" class="page-link"><?= $page ?></a>

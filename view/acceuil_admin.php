@@ -23,7 +23,7 @@ session_start();
                     <nav class="navbar navbar-expand-lg ">
                         <div class="container-fluid" >
                             <div ><h1 style="display:flex; justify-content:center;">ESPACE ADMINISTRATEUR</h1></div>
-                        <a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i><!-- Deconnection --></a>
+                        <a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i></a>
                       </div>
                    </nav>
              </div>
@@ -35,10 +35,10 @@ session_start();
        <div class="matricule"><?=$_SESSION["matricule"]?></div>
 
     
-       <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
-     <div style="gap:30px;display:flex;"><a href="acceuil_admin.php"><p >utilisateurs Actifs</p></a>
-       <a href="archives.php"><p >utilisateurs Inactifs</p></a>
-       </div>
+    
+     <div style="gap:30px;display:flex;"><a href="accueil_user_simple.php"><p >utilisateurs Actifs</p></a></div>
+     <a href="paginationUser.php"><p >utilisateurs Inactifs</p></a>
+       
        <div >
              <form action="" method="post" style="display: flex;gap:15px;margin-bottom:30px;">
                 <input type="search" name="P" placeholder="Entrer nom " class="form-control col-lg-9">

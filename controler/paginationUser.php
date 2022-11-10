@@ -25,7 +25,7 @@ if(isset($_GET['page']) && !empty($_GET['page'])){
     $currentPage = 1;
 }
 // On détermine le nombre total d'articles
-$sql = 'SELECT COUNT(*) AS matricule FROM `INSCRIPTION`;';
+$sql = 'SELECT COUNT(*) AS matricule FROM `INSCRIPTION` WHERE etat=1';
 
 // On prépare la requête
 $query = $dbco->prepare($sql);
@@ -100,7 +100,7 @@ die; */
 
     
        <div class="d-flex justify-content-center" style=" gap:30px;font-weight:bold;margin-left:100px;">
-     <div style="gap:30px;display:flex;"><a href="pagination.php"><p >utilisateurs Actifs</p></a>
+     <div style="gap:30px;display:flex;"><a href="pagination.php"><p style="color:darkgrey; text-decoration:none; ">utilisateurs Actifs</p></a>
        <a href="paginationUser.php"><p >utilisateurs Inactifs</p></a>
        </div>
        <div >
@@ -123,7 +123,7 @@ die; */
            <td> <?= $person["matricule"]  ?>  </td>
             <td style='display:flex; gap: 10px; justify-content:center;'>
                  
-                 <a title='archiver' href='ARCHIVER_VERIF.php?id=<?=$person['id'];?> ' onclick='return confirm("Êtes-vous sûr de vouloir désarchiver")'><i class='bi bi-archive'></i></a>
+                 <a title='désarchiver' href='ARCHIVER_VERIF.php?id=<?=$person['id'];?>' ><i class="bi bi-arrow-up-square"></i></a>
              
             </td>
            </tr>
