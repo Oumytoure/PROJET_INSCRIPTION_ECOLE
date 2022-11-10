@@ -1,8 +1,12 @@
 <?php
+ini_set("display_errors", "1");
+error_reporting(E_ALL);
 session_start();
 // On se connecte à là base de données
-include('connection_bd.php');
+include('../controler/connection_bd.php');
 $id=$_SESSION['id'];
+ /* var_dump($users);
+die;  */  
 
 if(isset($_POST['verif']) && isset($_POST['P'])){
     $recherche=htmlspecialchars($_POST['P']);
@@ -54,11 +58,11 @@ if(isset($_POST['verif']) && isset($_POST['P'])){
     
     // Calcul du 1er article de la page
     $premier = ($currentPage * $parPage) - $parPage;
-    $sql = 'SELECT * FROM `INSCRIPTION` WHERE etat=0  AND id!=:id ORDER BY `matricule` DESC LIMIT :premier, :parpage;';
+    $sql = 'SELECT * FROM `INSCRIPTION` WHERE etat=0   AND id!=:id  ORDER BY `matricule` DESC LIMIT :premier, :parpage;';
     
     // On prépare la requête
     $query = $dbco->prepare($sql);
-    $query->bindValue(':id', $id, PDO::PARAM_INT);
+    $query->bindValue(':id', $id, PDO::PARAM_INT); 
     $query->bindValue(':premier', $premier, PDO::PARAM_INT);
     $query->bindValue(':parpage', $parPage, PDO::PARAM_INT);
     
@@ -68,9 +72,8 @@ $query->execute();
 
 // On récupère les valeurs dans un tableau associatif
 $users = $query->fetchAll(PDO::FETCH_ASSOC);
-$id = $users["id"];
-/* var_dump($id);
-die; */
+ $id = $users["id"];
+
 /*  include("modifRole.php"); */
 
 
@@ -99,7 +102,7 @@ die; */
                 <div class="menu" >
                     <nav class="navbar navbar-expand-lg ">
                         <div class="container-fluid" >
-                            <h1 style="display:flex; justify-content:center;">ESPACE ADMINISTRATEUR</h1>
+                            <h1 style="display:flex; justify-content:center;">ESPACE UTILISATEUR</h1>
                         <a href="../view/connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i><!-- Deconnection --></a>
                       </div>
                    </nav>
@@ -124,7 +127,7 @@ die; */
             </div>
        </div>
         <table class="table table-bordered table-hover table-stripped">
-            <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>ROLE</th><th>MATRICULE</th><th>ACTIONS</th></tr>
+            <tr><th>NOM</th><th>PRENOM</th><th>EMAIL</th><th>MATRICULE</th><th>DATE_INS</th></tr>
             <?php
                 
            foreach($users as $person): ?>
@@ -132,14 +135,10 @@ die; */
            <td> <?= $person["nom"]  ?>  </td>
            <td> <?= $person["prenom"]  ?>  </td>
            <td> <?= $person["email"]  ?>  </td>
-           <td> <?= $person["roles"]  ?>  </td>
            <td> <?= $person["matricule"]  ?>  </td>
-            <td style='display:flex; gap: 10px; justify-content:center;'>
-                 
-                 <a title='archiver' href='Modifarchivage.php?id=<?=$person['id'];?> ' onclick='return confirm("Êtes-vous sûr de vouloir supprimer")'><i class='bi bi-archive'></i></a>
-                <a title='modifier' href='../view/mofification.php?updateid=<?=$person['id'];?>  ' ><i class='fa-solid fa-pen-to-square'></i></a>
-                <a title='switch' href='modifRole.php?id_roles=<?=$person['id'];?>  ' ><i class='fa-solid fa-rotate-right'></i></a>
-            </td>
+           <td> <?= $person["date_archive"]  ?>  </td>
+           
+            
            </tr>
              
            <?php endforeach;

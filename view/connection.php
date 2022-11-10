@@ -19,7 +19,7 @@
    
       <div><img src="images/gg.jpg" class="w-100" style="height:250px;object-fit:cover;"></div>
         <div style="background-color:white;border-radius:20px;height:600px;margin-top:-80px;" class="container col-md-4 border border-dark d-flex flex-column justify-content-center align-items-center">
-          <div class="d-flex justify-content-center"><h2 >FORMULAIRE INSCRIPTION</h2></div>
+          <div class="d-flex justify-content-center"><h2 >FORMULAIRE DE CONNECTION</h2></div>
           <div><img src="images/image.jpeg" alt="" class="border border-dark" style="margin-bottom:70px;"></div>
           <hr  style="width:80%; background-color:black; margin-top:-60px; margin-bottom:40px"/>
           <div class="d-flex flex-column justify-content-center w-50">

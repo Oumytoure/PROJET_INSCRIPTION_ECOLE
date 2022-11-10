@@ -1,5 +1,7 @@
 <?php
 session_start();
+ini_set("display_errors", "1");
+error_reporting(E_ALL);
 // On se connecte à là base de données
 include('connection_bd.php');
 
@@ -80,12 +82,12 @@ die; */
 <body>
 <header>
 <div class="logo container-fluid" style="position:fixed;width:100%; height: 150px;background-color:#0c82d1;display:flex;align-items:center;top:0px;" >
-<div class="container-fluid"><img src="images/image.jpeg" alt=""data-toggle="modal" data-target="#exampleModal" style="float: left;"></div>
+<div class="container-fluid"><img src="../view/images/image.jpeg" alt=""data-toggle="modal" data-target="#exampleModal" style="float: left;"></div>
                 <div class="menu" >
                     <nav class="navbar navbar-expand-lg ">
                         <div class="container-fluid" >
                             <h1 style="display:flex; justify-content:center;">ESPACE ADMINISTRATEUR</h1>
-                        <a href="connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i><!-- Deconnection --></a>
+                        <a href="../view/connection.php"><i class="fa-solid fa-arrow-right-from-bracket " style="color:white;"></i><!-- Deconnection --></a>
                       </div>
                    </nav>
              </div>

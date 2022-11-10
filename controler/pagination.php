@@ -1,8 +1,12 @@
 <?php
 session_start();
+ini_set("display_errors", "1");
+error_reporting(E_ALL);
 // On se connecte à là base de données
 include('connection_bd.php');
 $id=$_SESSION['id'];
+/* var_dump($users);
+die;   */
 
 if(isset($_POST['verif']) && isset($_POST['P'])){
     $recherche=htmlspecialchars($_POST['P']);
@@ -68,9 +72,8 @@ $query->execute();
 
 // On récupère les valeurs dans un tableau associatif
 $users = $query->fetchAll(PDO::FETCH_ASSOC);
-$id = $users["id"];
-/* var_dump($id);
-die; */
+ $id = $users["id"];
+
 /*  include("modifRole.php"); */
 
 
