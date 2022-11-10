@@ -21,7 +21,9 @@ if (isset($_POST["submit"])) {
         $photo = file_get_contents($_FILES['image']['tmp_name']) ?? null;
       } 
 
-      
+      if(!empty($email) && !filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        header("Location: ../view/inscription.php?email=Veuillez entrer un email correct");
+    }
 //On verifie si l'email existe dans la base de donnée ou pas
       include("connection_bd.php");
       $sth = $dbco->prepare(" SELECT * FROM INSCRIPTION  WHERE email = '".$email."'"); 

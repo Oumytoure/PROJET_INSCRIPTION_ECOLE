@@ -11,19 +11,14 @@
      if(isset($_POST["submit"])){ 
         if(isset($_POST["email"]) && isset($_POST["mot_passe"]) && !empty($_POST["email"]) && !empty($_POST["mot_passe"]))
         { 
-/*  if(isset($_SESSION['UTILISATEUR']))
-if($_SESSION['roles']==0){ 
-  echo $_SESSION['UTILISATEUR'];
-}  */
+
        
                    try{
                     include("connection_bd.php");
                   $sth = $dbco->prepare("SELECT * FROM INSCRIPTION WHERE email = '$email'"); 
                   $sth->execute();
                   $res = $sth->fetchAll(PDO::FETCH_ASSOC)[0]; 
-                  /* var_dump(@$res);
-                    die; */
-                /* ie;  */ 
+                 
                   if(count($res) > 0    && $res['roles'] == 'ADMINISTRATEUR' && $res['etat'] ==0   ){ 
                     
                     $_SESSION["id"]=$res["id"];

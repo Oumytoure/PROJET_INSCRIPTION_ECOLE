@@ -34,25 +34,9 @@ form.addEventListener('submit',function(e){
      } 
 
 
-
-
- 
-
 })
 
-/* email.addEventListener('keyup',function(e){
-    var erreur2 = document.getElementById("erreur2");
-     */
-   
-    /* if (email.value.trim() =='')  {
-       
-        erreur2.innerHTML = 'entrer votre email';
-        erreur2.style.color = 'red';
-       return;
-      }
-      erreur2.innerHTML = 'cooooooooool!';
-      erreur2.style.color = 'green';  */
-/*   }) */
+
 
   email.addEventListener('keyup',function(){
     validemail(this)})
@@ -88,7 +72,7 @@ form.addEventListener('submit',function(e){
     else {
         erreur2.innerHTML = 'mail incorrect';
         erreur2.style.color = 'red';  
-       inputemail.preventDefault();
+       e.preventDefault();
     
     }
     }
@@ -96,10 +80,7 @@ form.addEventListener('submit',function(e){
 
    
 
-   // conrtole Email
-    /*  var erreur2 = document.getElementById("erreur2"); */
- /*     var expressionReguliere='^[a-zA-Z0-9]+[a-zA-Z0-9.-]+[@]{1}[a-zA-Z0-9.-]+[.]{1}[a-z]{2,10}$'; */
-
+   
 
   
    

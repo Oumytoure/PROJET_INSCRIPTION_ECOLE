@@ -130,8 +130,9 @@
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">EMAIL<span>*</span></label>
             <input type="text" id="email" name="email" class="form-control mb-3 border border-dark" placeholder="entre votre email" >
             <span id="erreur2"></span>
-            
+
           </div>
+          
 
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-select ">ROLE<span>*</span></label>
@@ -155,7 +156,7 @@
           </div>
           <div class="col-lg-6">
             <label for="exampleFormControlInput1" style=" display:flex;justify-content:left;" class="form-label ">PHOTO</label>
-            <input type="file" id="photo" name="image" class="form-control mb-3 border border-dark" placeholder="entrer votre photo" >
+            <input type="file" id="photo" name="image" class="form-control mb-3 border border-dark" placeholder="entrer votre photo" accept=".png,.jpeg" >
             
           </div>
           <div class="col-lg-6">

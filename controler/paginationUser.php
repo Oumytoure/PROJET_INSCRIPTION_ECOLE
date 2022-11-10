@@ -153,3 +153,8 @@ die; */
 </nav>
 
     </div>
+    </body>
+        <footer class="text-center " style="background-color: black;height:60px; color: #fff;margin-top:250px;align-items:center;">
+            <p>Copyright &copy; 2022 </p>
+        </footer>
+</html>

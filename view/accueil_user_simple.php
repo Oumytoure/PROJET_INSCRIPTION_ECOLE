@@ -152,7 +152,7 @@ $users = $query->fetchAll(PDO::FETCH_ASSOC);
         <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
             <a href="?page=<?= $currentPage - 1 ?>" class="page-link">Précédente</a>
         </li>
-        <?php for($page = 1; $page <= $pages; $page++): ?>
+        <?php for(@$page = 1; @$page <= @$pages; @$page++): ?>
             <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
             <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
                 <a href="?page=<?= $page ?>" class="page-link"><?= $page ?></a>
@@ -166,3 +166,8 @@ $users = $query->fetchAll(PDO::FETCH_ASSOC);
 </nav>
 
     </div>
+    </body>
+        <footer class="text-center" style="background-color: black;height:60px; color: #fff;margin-top:250px;align-items:center;">
+            <p>Copyright &copy; 2022 </p>
+        </footer>
+</html>
