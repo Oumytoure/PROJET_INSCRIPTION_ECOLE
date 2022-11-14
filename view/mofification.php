@@ -78,20 +78,21 @@ if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
       <div class="col-md-6">
         <label for="inputEmail4" class="form-label">Prenom*</label>
         <input type="text" class="form-control" id="prenom" name="prenom" value="<?= $check["prenom"] ?? null  ?>" placeholder="PRENOM">
-        
+        <span id="erreur"></span>
 
       </div>
 
       <div class="col-md-6">
         <label for="inputPassword4" class="form-label">Nom*</label>
         <input type="text" class="form-control" id="nom" name="nom" value="<?= $check["nom"] ?? null  ?>" placeholder="NOM">
-        
+        <input type="text" name="nom" id="nom" class="form-control mb-3 border border-dark" placeholder="entre votre email">
+            <span id="erreur1"></span>
 
       </div>
       <div class="col-6">
         <label for="inputAddress" class="form-label">Email*</label>
         <input type="text" autocomplete="off" class="form-control" id="email" value="<?= $check["email"] ?? null  ?>" placeholder="Email" name="email">
-       
+        <span id="erreur2"></span>
 
       </div>
       <br>
@@ -99,7 +100,7 @@ if(isset($_POST['nom'],$_POST['prenom'],$_POST['email'])){
       <div class="col-12 d-flex justify-content-center">
         <button type="submit" class="btn btn-warning" name="submit">Modifier</button>
             </div> 
-      <script src=""></script>
+      <script src="../controler/inscription.js"></script>
     </form>
     </div>
 

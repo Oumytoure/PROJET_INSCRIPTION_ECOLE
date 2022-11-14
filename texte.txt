@@ -1,0 +1,19 @@
+DOCUMENTATION DU CITE
+CONNECTION
+Par Défaut on arrive a la page de connection l'utilisateur, s'il entre un mail ou un mot de passe qui n'est pas correcte on le dit d'entrer un 
+ bon mail ou mot de passe ;si les champs sont vide aussi on l'autorise pas à se connecter. s'il entre un mot de passe ou un mail correcte.
+ Il se connecte et passe au niveau de la page inscription ;si il n'est pas inscrite et veut se connecter aussi on lui dit qu'il n'a pas de compte il doit d'abord s'inscrire.
+
+ ************************************************************************************************
+ INSCRIPTION
+ S'il s'inscrit il doit remplir tous les champs si non s'il appuie sur le bouton s'inscrir on lui demande de remplir les champs car ils sont obligatoires. 
+ Il doit les remplir si le mail existe aussi on t'envoi un message de meme s'il est incorrecte. Si il a un compte il se connecte maintenant et se redirige
+ dans la page administrateur. Et si il est connecter en tand que administrateur si c'est un utilisateur il se dirige dans la page utilisateur simple. 
+
+ *************************************************************************************************
+ PAGE ADMINISTRATEUR
+L'admin peut voir tout les utilisateurs modifier,switcher;archiver
+PAGE utilisateur
+Il peut ni modifier ni switcher
+
+ 
